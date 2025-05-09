@@ -1,9 +1,49 @@
+<!-- navbar.component.html -->
+
 <nav class="navbar">
+  <!-- Scroll progress indicator -->
+  <div class="scroll-progress"></div>
+  
+  <!-- Brand/logo -->
   <div class="navbar-brand">
-    <a routerLink="/" class="brand-logo">My Portfolio</a>
+    <a routerLink="/" class="brand-logo">
+      <!-- Optional logo icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+      </svg>
+      My Portfolio
+    </a>
+    
+    <!-- Mobile menu toggle button -->
+    <button class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle Menu">
+      <svg *ngIf="!isMenuOpen" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+      <svg *ngIf="isMenuOpen" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
   </div>
-  <ul class="navbar-menu">
-    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
-    <li><a routerLink="/projects" routerLinkActive="active">Projects</a></li>
+  
+  <!-- Navigation menu -->
+  <ul class="navbar-menu" [class.active]="isMenuOpen">
+    <li>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">Home</a>
+    </li>
+    <li>
+      <a routerLink="/about" routerLinkActive="active" (click)="closeMenu()">About</a>
+    </li>
+    <li>
+      <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()">Projects</a>
+    </li>
+    <li>
+      <a routerLink="/skills" routerLinkActive="active" (click)="closeMenu()">Skills</a>
+    </li>
+    <li>
+      <a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">Contact</a>
+    </li>
   </ul>
 </nav>
