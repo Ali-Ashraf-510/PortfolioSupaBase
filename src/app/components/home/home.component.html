@@ -1,0 +1,47 @@
+<!-- home.component.html -->
+
+<!-- Hero Section with Animations -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <img src="../../../assets/profile.jpg" alt="Profile Photo" class="hero-image">
+      
+      <h1 data-text="Welcome to My Portfolio" appTextAnimation [animationType]="'reveal'" [animationDelay]="300">
+        Welcome to My Portfolio
+      </h1>
+      
+      <p class="typewriter" appTextAnimation [animationType]="'typewriter'" [animationDelay]="800" [animationDuration]="2500">
+        Discover my projects and get in touch!
+      </p>
+      
+      <a routerLink="/projects" class="cta-button">View Projects</a>
+    </div>
+  </div>
+</section>
+
+
+<section class="home-container">
+  <div class="container">
+    <!-- These components already have animations applied via SCSS -->
+    <app-about></app-about>
+    <app-contact></app-contact>
+  </div>
+</section>
+
+<!-- Additional section with Angular-based animations -->
+<section class="skills-section">
+  <h2 class="section-title">My Skills</h2>
+  
+  <div class="skills-grid">
+    <!-- These will be animated with staggered delay using the service -->
+    <div class="skill-item" *ngFor="let skill of skills; let i = index" 
+         [attr.data-animate]="true" 
+         [attr.data-animation-type]="'slide-up'"
+         [attr.data-animation-delay]="i * 100">
+      <div class="skill-icon">
+        <i [class]="skill.icon"></i>
+      </div>
+      <div class="skill-name">{{ skill.name }}</div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,80 @@
+@import '../../../../src/style/variables.scss';
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $white;
+  box-shadow: 0 2px 4px $shadow;
+  padding: 15px 30px;
+  position: fixed; // Keep fixed as per your code
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  .navbar-brand {
+    .brand-logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $primary; // Use new indigo color
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $primary-dark; // Darker indigo on hover
+      }
+    }
+  }
+
+  .navbar-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin-left: 20px;
+
+      a {
+        color: $text; // Dark text for contrast
+        text-decoration: none;
+        font-size: 1rem;
+        padding: 10px 15px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+
+        &:hover {
+          background-color: lighten($primary, 40%); // Light indigo on hover
+          color: $primary;
+        }
+
+        &.active {
+          background-color: $primary; // Indigo background for active link
+          color: $white;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .navbar-menu {
+      flex-direction: column;
+      width: 100%;
+      margin-top: 10px;
+
+      li {
+        margin: 10px 0;
+        width: 100%;
+
+        a {
+          display: block;
+          padding: 10px;
+        }
+      }
+    }
+  }
+}

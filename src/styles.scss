@@ -1,1 +1,56 @@
-/* You can add global styles to this file, and also import other style files */
+// Import a modern font (optional: include via Google Fonts in index.html)
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+// Color palette
+$primary: #007bff; // Blue
+$primary-dark: #0056b3;
+$secondary: #6c757d; // Gray
+$background: #f8f9fa; // Light gray
+$text: #343a40; // Dark gray
+$white: #ffffff;
+$shadow: rgba(0, 0, 0, 0.1);
+
+// Reset defaults
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: $background;
+  color: $text;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// Utility classes
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $text;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.card {
+  background: $white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px $shadow;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px $shadow;
+  }
+}

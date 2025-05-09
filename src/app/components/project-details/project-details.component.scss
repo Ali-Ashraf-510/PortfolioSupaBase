@@ -1,0 +1,14 @@
+.project-details {
+  margin-left: 220px;
+  padding: 20px;
+  a {
+    color: #007bff;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .error {
+    color: red;
+  }
+}

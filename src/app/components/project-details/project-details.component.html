@@ -1,0 +1,12 @@
+<section class="project-details">
+  <div *ngIf="project; else loading">
+    <h2>{{ project.title }}</h2>
+    <p>{{ project.description }}</p>
+    <p>Additional details about the project go here.</p>
+    <a routerLink="/projects">Back to Projects</a>
+  </div>
+  <ng-template #loading>
+    <p *ngIf="!errorMessage">Loading...</p>
+  </ng-template>
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+</section>

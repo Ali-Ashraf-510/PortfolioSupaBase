@@ -1,0 +1,499 @@
+// Professional Portfolio Variables
+$colors: (
+  primary: #2c3e50,        // Deep blue-gray for professional look
+  secondary: #ffffff,      // Clean white
+  accent: #3498db,         // Professional blue accent
+  text-primary: #333333,   // Dark text for readability
+  text-secondary: #f5f5f5, // Light text
+  subtle: #ecf0f1,         // Subtle background
+  cta: #3498db             // Call to action button
+);
+
+// Typography
+$font-primary: 'Montserrat', sans-serif;
+$font-secondary: 'Open Sans', sans-serif;
+
+// Animation Variables
+$animation-slow: 1s;
+$animation-medium: 0.7s;
+$animation-fast: 0.4s;
+
+// Breakpoints
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin transition($property: all, $duration: 0.3s) {
+  transition: $property $duration cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@mixin shadow($level: 1) {
+  @if $level == 1 {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  } @else if $level == 2 {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  } @else if $level == 3 {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "Invalid breakpoint: #{$breakpoint}.";
+  }
+}
+
+// Animation Mixins
+@mixin fade-in($duration: $animation-medium, $delay: 0s) {
+  opacity: 0;
+  animation: fadeIn $duration ease-out forwards;
+  animation-delay: $delay;
+}
+
+@mixin slide-up($duration: $animation-medium, $delay: 0s, $distance: 20px) {
+  transform: translateY($distance);
+  opacity: 0;
+  animation: slideUp $duration cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  animation-delay: $delay;
+}
+
+@mixin slide-in-right($duration: $animation-medium, $delay: 0s, $distance: 50px) {
+  transform: translateX($distance);
+  opacity: 0;
+  animation: slideInRight $duration cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  animation-delay: $delay;
+}
+
+@mixin reveal-text($duration: $animation-slow, $delay: 0s) {
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: map-get($colors, accent);
+    animation: revealText $duration cubic-bezier(0.77, 0, 0.18, 1) forwards;
+    animation-delay: $delay;
+    transform-origin: right;
+  }
+}
+
+// Animation Keyframes
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to { 
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from { 
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to { 
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes revealText {
+  0% { transform: scaleX(1); }
+  100% { transform: scaleX(0); }
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  from { border-right-color: rgba(52, 152, 219, 0.75); }
+  to { border-right-color: transparent; }
+}
+
+@keyframes floatAnimation {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes pulseGlow {
+  0% { text-shadow: 0 0 0 rgba(52, 152, 219, 0); }
+  50% { text-shadow: 0 0 10px rgba(52, 152, 219, 0.5); }
+  100% { text-shadow: 0 0 0 rgba(52, 152, 219, 0); }
+}
+
+// Base Styles
+html, body {
+  font-family: $font-secondary;
+  color: map-get($colors, text-primary);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-primary;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+a {
+  text-decoration: none;
+  color: map-get($colors, accent);
+  @include transition();
+  
+  &:hover {
+    color: darken(map-get($colors, accent), 15%);
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+// Hero Section
+.hero {
+  position: relative;
+  background-color: map-get($colors, primary);
+  padding: 6rem 0;
+  color: map-get($colors, text-secondary);
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(44, 62, 80, 0.9) 0%, rgba(52, 152, 219, 0.8) 100%);
+    z-index: 1;
+  }
+  
+  .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-content {
+    @include flex-column;
+    align-items: center;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+
+    .hero-image {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 4px solid map-get($colors, secondary);
+      object-fit: cover;
+      margin-bottom: 2rem;
+      @include transition(transform);
+      @include shadow(2);
+      @include fade-in($animation-medium, 0.2s);
+      animation: floatAnimation 6s ease-in-out infinite;
+      
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      margin: 0.5rem 0;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      position: relative;
+      @include reveal-text($animation-medium, 0.3s);
+      
+      // Text glow animation after reveal
+      &::before {
+        content: attr(data-text);
+        position: absolute;
+        width: 100%;
+        color: inherit;
+        animation: pulseGlow 4s ease-in-out infinite;
+        animation-delay: 1.3s;
+      }
+    }
+
+    p {
+      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      margin-bottom: 2rem;
+      opacity: 0;
+      max-width: 600px;
+      animation: fadeIn 0.8s ease-out 0.8s forwards;
+      
+      // Typewriter effect - will be applied via Angular
+      &.typewriter {
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        margin: 0 auto;
+        border-right: 3px solid rgba(52, 152, 219, 0.75);
+        animation: 
+          typewriter 2.5s steps(40, end) 1s forwards,
+          blink 0.75s step-end infinite;
+        width: 0;
+      }
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 0.9rem 2rem;
+      background-color: map-get($colors, cta);
+      color: map-get($colors, secondary);
+      border-radius: 4px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+      @include transition(all);
+      @include shadow(1);
+      @include slide-up($animation-medium, 1.2s);
+      
+      &:hover {
+        background-color: darken(map-get($colors, cta), 10%);
+        transform: translateY(-2px);
+        @include shadow(2);
+      }
+      
+      &:active {
+        transform: translateY(0);
+        @include shadow(1);
+      }
+    }
+  }
+}
+
+// Home Section
+.home-container {
+  background-color: map-get($colors, secondary);
+  padding: 5rem 0;
+  
+  .container {
+    @include respond-to(md) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+    }
+  }
+  
+  app-about,
+  app-contact {
+    background-color: map-get($colors, subtle);
+    border-radius: 8px;
+    overflow: hidden;
+    @include shadow(2);
+    @include transition(transform);
+    height: 100%;
+    opacity: 0;
+    
+    &:hover {
+      transform: translateY(-5px);
+      @include shadow(3);
+    }
+    
+    // Add this for mobile spacing
+    &:not(:last-child) {
+      margin-bottom: 2.5rem;
+      
+      @include respond-to(md) {
+        margin-bottom: 0;
+      }
+    }
+  }
+  
+  // Apply animations with staggered delay
+  app-about {
+    @include slide-in-right($animation-medium, 0.3s);
+  }
+  
+  app-contact {
+    @include slide-in-right($animation-medium, 0.6s);
+  }
+}
+
+// Additional Professional Components
+.section-title {
+  position: relative;
+  font-size: 2rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  text-align: center;
+  @include slide-up($animation-medium, 0.2s);
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; // Start with 0 width
+    height: 3px;
+    background-color: map-get($colors, accent);
+    animation: expandWidth 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.6s forwards;
+  }
+}
+
+@keyframes expandWidth {
+  from { width: 0; }
+  to { width: 80px; }
+}
+
+// Skills section (if needed)
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1.5rem;
+  
+  .skill-item {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    background-color: map-get($colors, subtle);
+    border-radius: 8px;
+    @include transition();
+    @include shadow(1);
+    
+    &:hover {
+      @include shadow(2);
+      transform: translateY(-3px);
+    }
+    
+    .skill-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: map-get($colors, accent);
+    }
+    
+    .skill-name {
+      font-weight: 600;
+    }
+  }
+}
+
+// Project cards (if needed)
+.project-card {
+  border-radius: 8px;
+  overflow: hidden;
+  @include shadow(2);
+  @include transition();
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  &:hover {
+    transform: translateY(-5px);
+    @include shadow(3);
+  }
+  
+  .project-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .project-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    
+    .project-title {
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      font-size: 1.35rem;
+    }
+    
+    .project-description {
+      margin-bottom: 1.5rem;
+      color: lighten(map-get($colors, text-primary), 20%);
+      flex-grow: 1;
+    }
+    
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      
+      .tech-tag {
+        padding: 0.3rem 0.75rem;
+        background-color: lighten(map-get($colors, accent), 35%);
+        border-radius: 4px;
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+    }
+    
+    .project-links {
+      display: flex;
+      gap: 1rem;
+      
+      a {
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        font-weight: 500;
+        font-size: 0.9rem;
+        text-align: center;
+        @include transition();
+        
+        &.demo-link {
+          background-color: map-get($colors, accent);
+          color: white;
+          
+          &:hover {
+            background-color: darken(map-get($colors, accent), 10%);
+          }
+        }
+        
+        &.code-link {
+          border: 1px solid map-get($colors, accent);
+          color: map-get($colors, accent);
+          
+          &:hover {
+            background-color: lighten(map-get($colors, accent), 45%);
+          }
+        }
+      }
+    }
+  }
+}
