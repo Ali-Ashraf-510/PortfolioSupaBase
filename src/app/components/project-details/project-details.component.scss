@@ -16,11 +16,11 @@ $transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   margin-top: 70px;
 
   .container {
-    @extend .container;
+    @extend .container !optional; // Add !optional for safety
   }
 
   h2 {
-    @extend .section-title;
+    @extend .section-title !optional; // Add !optional to prevent build failure
     margin-bottom: 20px;
   }
 
