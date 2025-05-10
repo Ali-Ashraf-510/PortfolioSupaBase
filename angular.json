@@ -12,6 +12,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "browser": "src/main.ts", 
             "outputPath": "dist/portfolio-website",
             "index": "src/index.html",
             "polyfills": [
@@ -27,7 +28,8 @@
               "src/styles.scss",
               "node_modules/@fortawesome/fontawesome-free/css/all.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": ["ws"] 
           },
           "configurations": {
             "production": {
