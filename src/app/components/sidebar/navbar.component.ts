@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 export class NavbarComponent implements OnInit {
   isMenuOpen = false;
   scrollProgress = 0;
+  isScrolled = false;
 
   constructor(private renderer: Renderer2, private el: ElementRef) {}
 
@@ -26,6 +27,7 @@ export class NavbarComponent implements OnInit {
   onWindowScroll(): void {
     this.checkScrollPosition();
     this.updateScrollProgress();
+    this.isScrolled = window.scrollY > 50;
   }
 
   private checkScrollPosition(): void {
@@ -45,7 +47,7 @@ export class NavbarComponent implements OnInit {
       }
     }
   }
-
+ 
   closeMenu(): void {
     if (this.isMenuOpen) {
       this.isMenuOpen = false;

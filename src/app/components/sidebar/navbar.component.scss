@@ -1,12 +1,45 @@
 // Navbar Variables
-$navbar-bg: rgba(15, 16, 22, 0.95);
+$navbar-bg: rgba(15, 16, 22, 0.85);
+$navbar-bg-scrolled: rgba(15, 16, 22, 0.95);
 $navbar-text: #ffffff;
-$navbar-height: 70px;
+$navbar-height: 80px;
+$navbar-height-scrolled: 70px;
 $navbar-mobile-height: 60px;
 $primary-color: #6c5ce7;
+$primary-light: #8e7ef2;
+$primary-dark: #5549c2;
 $accent-color: #00d2d3;
+$accent-light: #4be5e6;
 $dark-color: #0f1016;
+$card-bg: #1a1b25;
 $transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+$transition-slow: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+$box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+
+// Keyframes for animations
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shine {
+  0% { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba($primary-color, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba($primary-color, 0); }
+  100% { box-shadow: 0 0 0 0 rgba($primary-color, 0); }
+}
+
+// Mixins
+@mixin glass-effect {
+  background: rgba($card-bg, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
 
 // Navbar Styling
 .navbar {
@@ -16,14 +49,27 @@ $transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   width: 100%;
   height: $navbar-height;
   background: $navbar-bg;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 5%;
   z-index: 1000;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: $transition;
+  
+  // Scrolled state
+  &.scrolled {
+    height: $navbar-height-scrolled;
+    background: $navbar-bg-scrolled;
+    box-shadow: $box-shadow;
+    
+    .navbar-brand .brand-logo {
+      transform: scale(0.95);
+    }
+  }
   
   // Scroll progress indicator
   .scroll-progress {
@@ -32,7 +78,9 @@ $transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     left: 0;
     height: 3px;
     width: 0%;
-    background: linear-gradient(90deg, $primary-color, $accent-color);
+    background: linear-gradient(90deg, $primary-color, $accent-color, $primary-light, $accent-light);
+    background-size: 300% 100%;
+    animation: shine 4s linear infinite;
     z-index: 1001;
     transition: width 0.1s ease;
   }
@@ -49,20 +97,20 @@ $transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
       align-items: center;
       color: $navbar-text;
       font-weight: 700;
-      font-size: 1.25rem;
+      font-size: 1.4rem;
       text-decoration: none;
       transition: $transition;
       letter-spacing: 0.5px;
       
       svg {
-        margin-right: 10px;
+        margin-right: 12px;
         stroke: $primary-color;
         transition: $transition;
-        filter: drop-shadow(0 0 8px rgba(108, 92, 231, 0.5));
+        filter: drop-shadow(0 0 10px rgba($primary-color, 0.6));
       }
       
       span {
-        background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.85));
+        background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.9));
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -74,6 +122,7 @@ $transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         svg {
           transform: rotate(20deg) scale(1.1);
           stroke: $accent-color;
+          filter: drop-shadow(0 0 15px rgba($accent-color, 0.8));
         }
       }
     }
@@ -86,6 +135,15 @@ $transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
       cursor: pointer;
       padding: 10px;
       outline: none;
+      transition: $transition;
+      
+      &:hover {
+        transform: scale(1.1);
+      }
+      
+      &:active {
+        transform: scale(0.95);
+      }
       
       .menu-icon {
         position: relative;
@@ -143,6 +201,7 @@ $transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     list-style: none;
     margin: 0;
     padding: 0;
+    align-items: center;
     
     li {
       margin: 0 5px;
@@ -152,9 +211,9 @@ $transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         display: flex;
         align-items: center;
         color: rgba(255, 255, 255, 0.8);
-        padding: 10px 15px;
+        padding: 10px 16px;
         text-decoration: none;
-        border-radius: 8px;
+        border-radius: 10px;
         font-weight: 500;
         transition: $transition;
         position: relative;
@@ -164,11 +223,13 @@ $transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
           margin-right: 8px;
           opacity: 0.9;
           transition: $transition;
+          stroke-width: 2px;
         }
         
         span {
           position: relative;
           z-index: 2;
+          letter-spacing: 0.3px;
         }
         
         &::before {
@@ -178,8 +239,8 @@ $transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(135deg, rgba(108, 92, 231, 0.2), rgba(0, 210, 211, 0.2));
-          border-radius: 8px;
+          background: linear-gradient(135deg, rgba($primary-color, 0.15), rgba($accent-color, 0.15));
+          border-radius: 10px;
           opacity: 0;
           transform: scale(0.9);
           transition: $transition;
@@ -195,22 +256,59 @@ $transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
           }
           
           svg {
-            transform: translateY(-2px);
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+            transform: translateY(-3px) scale(1.1);
+            filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.3));
+            stroke: $accent-color;
           }
         }
         
         &.active {
+          font-weight: 600;
+          
           &::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: 5px;
             left: 50%;
             transform: translateX(-50%);
             width: 20px;
             height: 3px;
             background: linear-gradient(90deg, $primary-color, $accent-color);
             border-radius: 3px;
+            box-shadow: 0 0 8px rgba($accent-color, 0.5);
+          }
+        }
+      }
+
+      // Theme toggle styling
+      &.theme-toggle-container {
+        margin-left: 10px;
+        
+        .theme-toggle {
+          background: rgba($primary-color, 0.15);
+          border: 1px solid rgba($primary-color, 0.3);
+          border-radius: 50%;
+          width: 36px;
+          height: 36px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: $transition;
+          color: rgba(255, 255, 255, 0.9);
+          
+          &:hover {
+            background: rgba($primary-color, 0.3);
+            transform: rotate(30deg);
+          }
+          
+          &:active {
+            transform: scale(0.9);
+          }
+          
+          svg {
+            stroke: $accent-light;
+            transition: $transition;
           }
         }
       }
@@ -224,8 +322,21 @@ $transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     height: $navbar-mobile-height;
     padding: 0 4%;
     
+    &.scrolled {
+      height: $navbar-mobile-height;
+    }
+    
     .navbar-brand {
       width: 100%;
+      
+      .brand-logo {
+        font-size: 1.2rem;
+        
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
       
       .menu-toggle {
         display: block;
@@ -238,18 +349,18 @@ $transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
       left: 0;
       width: 100%;
       height: 0;
-      background: $navbar-bg;
+      @include glass-effect;
       flex-direction: column;
       overflow: hidden;
-      transition: height 0.3s ease;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: height 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       
       li {
         margin: 0;
         width: 100%;
         opacity: 0;
         transform: translateY(20px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
+        transition: opacity 0.4s ease, transform 0.4s ease;
         
         a {
           padding: 15px 5%;
@@ -267,14 +378,25 @@ $transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             top: 50%;
             transform: translateY(-50%);
             width: 3px;
-            height: 20px;
+            height: 25px;
+          }
+        }
+        
+        &.theme-toggle-container {
+          margin: 15px auto;
+          width: auto;
+          
+          .theme-toggle {
+            margin: 0 auto;
+            width: 40px;
+            height: 40px;
           }
         }
       }
       
       &.active {
         height: auto;
-        padding: 10px 0;
+        padding: 15px 0;
         
         li {
           opacity: 1;
@@ -285,7 +407,19 @@ $transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
           }
           
           &:nth-child(2) {
+            transition-delay: 0.15s;
+          }
+          
+          &:nth-child(3) {
             transition-delay: 0.2s;
+          }
+          
+          &:nth-child(4) {
+            transition-delay: 0.25s;
+          }
+          
+          &:nth-child(5) {
+            transition-delay: 0.3s;
           }
         }
       }
@@ -293,3 +427,27 @@ $transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 }
 
+// Right-to-left (RTL) support
+[dir="rtl"] {
+  .navbar {
+    .navbar-brand {
+      .brand-logo {
+        svg {
+          margin-right: 0;
+          margin-left: 12px;
+        }
+      }
+    }
+    
+    .navbar-menu {
+      li {
+        a {
+          svg {
+            margin-right: 0;
+            margin-left: 8px;
+          }
+        }
+      }
+    }
+  }
+}

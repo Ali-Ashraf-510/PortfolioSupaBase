@@ -55,3 +55,56 @@ body {
     box-shadow: 0 6px 12px $shadow;
   }
 }
+
+:root {
+  // Light theme variables
+  --background: #f5f5fa;
+  --card-bg: #ffffff;
+  --text-color: #222222;
+  --text-muted: #666666;
+  --primary-color: #6c5ce7;
+  --primary-light: #8e7ef2;
+  --primary-dark: #5549c2;
+  --accent-color: #00d2d3;
+  --accent-light: #4be5e6;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --navbar-bg: rgba(255, 255, 255, 0.85);
+  --navbar-text: #222222;
+}
+
+
+dark-theme {
+  --background: #0f1016;
+  --card-bg: #1a1b25;
+  --text-color: #e2e2e2;
+  --text-muted: #a0a0a0;
+  --primary-color: #6c5ce7;
+  --primary-light: #8e7ef2;
+  --primary-dark: #5549c2;
+  --accent-color: #00d2d3;
+  --accent-light: #4be5e6;
+  --border-color: rgba(255, 255, 255, 0.05);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --navbar-bg: rgba(15, 16, 22, 0.85);
+  --navbar-text: #ffffff;
+}
+
+// Light theme override
+body.light-theme {
+  --background: #f5f5fa;
+  --card-bg: #ffffff;
+  --text-color: #222222;
+  --text-muted: #666666;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --navbar-bg: rgba(255, 255, 255, 0.85);
+  --navbar-text: #222222;
+}
+
+// Theme transition
+body {
+  transition: background-color 0.5s ease, color 0.5s ease;
+  background-color: var(--background);
+  color: var(--text-color);
+}

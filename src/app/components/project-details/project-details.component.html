@@ -2,11 +2,48 @@
   <div class="container">
     <h2>{{ project.title }}</h2>
     <p class="project-type">{{ project.project_type }}</p>
-    <img [src]="project.photo_url" [alt]="project.title" class="project-image" />
-    <p>{{ project.description }}</p>
-    <div class="project-links">
-      <a *ngIf="project.github_url" [href]="project.github_url" target="_blank" class="github-link">GitHub</a>
-      <a routerLink="/projects" class="back-link">Back to Projects</a>
+    
+    <div class="project-image-container">
+      <img [src]="project.photo_url" [alt]="project.title" class="project-image" />
+    </div>
+    
+    <div class="project-content">
+      <div class="tag-list" *ngIf="project.tags && project.tags.length">
+        <span class="tag" *ngFor="let tag of project.tags">{{ tag }}</span>
+      </div>
+      
+      <p>{{ project.description }}</p>
+      
+      <div class="project-meta" *ngIf="project.meta">
+        <div class="meta-item" *ngIf="project.meta.client">
+          <div class="meta-label">Client</div>
+          <div class="meta-value">{{ project.meta.client }}</div>
+        </div>
+        <div class="meta-item" *ngIf="project.meta.duration">
+          <div class="meta-label">Duration</div>
+          <div class="meta-value">{{ project.meta.duration }}</div>
+        </div>
+        <div class="meta-item" *ngIf="project.meta.completed">
+          <div class="meta-label">Completed</div>
+          <div class="meta-value">{{ project.meta.completed }}</div>
+        </div>
+        <div class="meta-item" *ngIf="project.meta.role">
+          <div class="meta-label">My Role</div>
+          <div class="meta-value">{{ project.meta.role }}</div>
+        </div>
+      </div>
+      
+      <div class="project-links">
+        <a *ngIf="project.github_url" [href]="project.github_url" target="_blank" class="github-link">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a *ngIf="project.live_url" [href]="project.live_url" target="_blank" class="github-link">
+          <i class="fas fa-external-link-alt"></i> Live Demo
+        </a>
+        <a routerLink="/projects" class="back-link">
+          <i class="fas fa-arrow-left"></i> Back to Projects
+        </a>
+      </div>
     </div>
   </div>
 </section>
