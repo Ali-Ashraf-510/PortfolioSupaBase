@@ -1,10 +1,11 @@
-<body class="projects">
+<section class="projects">
   <div class="container">
-    <h2>Projects</h2>
+    <h2 data-title="Portfolio">Projects</h2>
     <div class="project-list">
       <div *ngFor="let project of projects" class="project-card">
         <img [src]="project.photo_url" [alt]="project.title" class="project-image" />
         <h3>{{ project.title }}</h3>
+        <p class="project-type">{{ project.project_type }}</p>
         <p>{{ project.description }}</p>
         <div class="project-links">
           <a [routerLink]="['/project', project.id]" class="details-link">Details</a>
@@ -14,4 +15,4 @@
     </div>
     <p *ngIf="error" class="error">{{ error }}</p>
   </div>
-</body>
+</section>

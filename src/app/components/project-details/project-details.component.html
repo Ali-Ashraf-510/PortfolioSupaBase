@@ -1,12 +1,12 @@
-<section class="project-details">
-  <div *ngIf="project; else loading">
+<section class="project-details" *ngIf="project">
+  <div class="container">
     <h2>{{ project.title }}</h2>
+    <p class="project-type">{{ project.project_type }}</p>
+    <img [src]="project.photo_url" [alt]="project.title" class="project-image" />
     <p>{{ project.description }}</p>
-    <p>Additional details about the project go here.</p>
-    <a routerLink="/projects">Back to Projects</a>
+    <div class="project-links">
+      <a *ngIf="project.github_url" [href]="project.github_url" target="_blank" class="github-link">GitHub</a>
+      <a routerLink="/projects" class="back-link">Back to Projects</a>
+    </div>
   </div>
-  <ng-template #loading>
-    <p *ngIf="!errorMessage">Loading...</p>
-  </ng-template>
-  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
 </section>

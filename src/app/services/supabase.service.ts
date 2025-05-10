@@ -20,7 +20,7 @@ export class SupabaseService {
   async getProjects() {
     const { data, error } = await this.supabase
       .from('projects')
-      .select('id, title, description, photo_url, github_url')
+      .select('id, title, description, photo_url, github_url, project_type')
       .order('created_at', { ascending: false });
     if (error) throw error;
     return data;
@@ -29,12 +29,13 @@ export class SupabaseService {
   async getProjectById(id: number) {
     const { data, error } = await this.supabase
       .from('projects')
-      .select('id, title, description, photo_url, github_url')
+      .select('id, title, description, photo_url, github_url, project_type')
       .eq('id', id)
       .single();
     if (error) throw error;
     return data;
   }
+
   async getCertificates() {
     const { data, error } = await this.supabase
       .from('certificates')

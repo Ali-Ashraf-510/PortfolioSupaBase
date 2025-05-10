@@ -1,0 +1,177 @@
+@import '../../../style/variables.scss';
+@import '../../../style/utilities.scss';
+
+.cv {
+  padding: 120px 0 80px;
+  background-color: $dark-bg;
+  min-height: 100vh;
+  margin-top: 70px;
+
+  .container {
+    @extend .container;
+  }
+
+  h2 {
+    @extend .section-title;
+    &[data-title]::after {
+      content: "CV";
+    }
+  }
+
+  .cv-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .cv-download {
+    text-align: center;
+    margin-bottom: 40px;
+
+    .download-button {
+      display: inline-block;
+      padding: 12px 24px;
+      background: $primary-color;
+      color: $white;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: $transition;
+
+      &:hover {
+        background: darken($primary-color, 5%);
+        transform: translateY(-3px);
+      }
+    }
+  }
+
+  .cv-section {
+    margin-bottom: 40px;
+
+    h3 {
+      color: $text-color;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: $primary-color;
+      }
+    }
+
+    .cv-item {
+      background: $card-bg;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+
+      h4 {
+        color: $text-color;
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+      }
+
+      p {
+        color: rgba($text-color, 0.7);
+        font-size: 1rem;
+        margin-bottom: 5px;
+      }
+    }
+
+    .skills-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+
+      li {
+        color: $text-color;
+        font-size: 1rem;
+        padding: 10px;
+        background: $card-bg;
+        border-radius: 8px;
+      }
+    }
+
+    p {
+      color: $text-color;
+      font-size: 1rem;
+
+      a {
+        color: $primary-color;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 100px 0 60px;
+
+    h2 {
+      font-size: 2.2rem;
+    }
+
+    .cv-content {
+      padding: 0 15px;
+    }
+
+    .cv-download {
+      margin-bottom: 30px;
+
+      .download-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+    }
+
+    .cv-section {
+      h3 {
+        font-size: 1.6rem;
+      }
+
+      .cv-item {
+        padding: 15px;
+
+        h4 {
+          font-size: 1.2rem;
+        }
+
+        p {
+          font-size: 0.9rem;
+        }
+      }
+
+      .skills-list {
+        grid-template-columns: 1fr;
+
+        li {
+          font-size: 0.9rem;
+          padding: 8px;
+        }
+      }
+    }
+  }
+
+  :host-context([dir="rtl"]) {
+    direction: rtl;
+    text-align: right;
+
+    .cv-section {
+      h3::after {
+        left: auto;
+        right: 0;
+      }
+    }
+  }
+}

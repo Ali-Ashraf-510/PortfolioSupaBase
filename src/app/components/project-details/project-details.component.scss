@@ -1,14 +1,125 @@
+// Projects Section Variables
+$primary-color: #6c5ce7;
+$secondary-color: #191a1f;
+$accent-color: #00d2d3;
+$dark-bg: #0f1016;
+$card-bg: #1a1b25;
+$text-color: #e2e2e2;
+$white: #ffffff;
+$error: #ff6b6b;
+$transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
 .project-details {
-  margin-left: 220px;
-  padding: 20px;
-  a {
-    color: #007bff;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
+  padding: 120px 0 80px;
+  background-color: $dark-bg;
+  min-height: 100vh;
+  margin-top: 70px;
+
+  .container {
+    @extend .container;
+  }
+
+  h2 {
+    @extend .section-title;
+    margin-bottom: 20px;
+  }
+
+  .project-type {
+    color: rgba($text-color, 0.7);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .project-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
+
+  p {
+    color: $text-color;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 15px;
+
+    a {
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: $transition;
+
+      &.github-link {
+        background: $primary-color;
+        color: $white;
+
+        &:hover {
+          background: darken($primary-color, 5%);
+        }
+      }
+
+      &.back-link {
+        background: transparent;
+        color: $text-color;
+        border: 1px solid rgba($text-color, 0.1);
+
+        &:hover {
+          color: $white;
+          border-color: rgba($text-color, 0.2);
+          background: rgba($text-color, 0.08);
+        }
+      }
     }
   }
+
   .error {
-    color: red;
+    color: $error;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 100px 0 60px;
+
+    h2 {
+      font-size: 2.2rem;
+    }
+
+    .project-type {
+      font-size: 1rem;
+    }
+
+    .project-image {
+      max-height: 300px;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+
+    .project-links {
+      flex-direction: column;
+      gap: 10px;
+
+      a {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  :host-context([dir="rtl"]) {
+    direction: rtl;
+    text-align: right;
   }
 }
