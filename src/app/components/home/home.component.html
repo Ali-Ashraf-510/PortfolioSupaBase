@@ -1,78 +1,204 @@
+<!-- home.component.html -->
 <section class="hero">
   <div class="container">
     <div class="hero-content">
-      <img src="../../../assets/profile.jpg" alt="Profile Photo" class="hero-image">
-      <h1>Welcome to My Portfolio</h1>
-      <p>Discover my projects and get in touch!</p>
-      <a routerLink="/projects"class="cta-button">View Projects</a>
+      <div class="hero-background-shapes"></div>
+      <img src="assets/profile.jpg" alt="Ali Ashraf" class="hero-image">
+      <h1 class="animated-text">Ali Ashraf</h1>
+      <p class="hero-tagline">Junior Data Science Engineer</p>
+      <p>Transforming data into actionable insights</p>
+      <div class="cta-buttons">
+        <a routerLink="/projects" class="cta-button primary">View Projects</a>
+        <a href="#contact" class="cta-button secondary">Contact Me</a>
+      </div>
     </div>
   </div>
 </section>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <section class="about">
-  <h2>About Me</h2>
-  <p>
-    Hi, I'm Ali Ashraf, a Junior Data Science Engineer passionate about transforming data into actionable insights. 
-    I'm still learning and expanding my skills in data science, machine learning, and data-driven solutions.
-  </p>
-  <h3>Skills</h3>
-  <ul>
-    <li><i class="fas fa-chart-line"></i> Data Analysis and Visualization (Pandas, Matplotlib, Seaborn)</li>
-    <li><i class="fas fa-brain"></i> Machine Learning (Scikit-learn, TensorFlow)</li>
-    <li><i class="fas fa-layer-group"></i> Deep Learning (Basics of Neural Networks)</li>
-    <li><i class="fas fa-broom"></i> Data Cleaning and Preprocessing</li>
-    <li><i class="fas fa-database"></i> SQL and Database Management</li>
-    <li><i class="fab fa-python"></i> Python Programming</li>
-    <li><i class="fas fa-percent"></i> Statistical Analysis</li>
-    <li><i class="fas fa-comment-dots"></i> Natural Language Processing (Basics)</li>
-    <li><i class="fas fa-cloud"></i> Cloud Platforms (Basic AWS, Azure)</li>
-  </ul>
+  <div class="container">
+    <div class="about-content">
+      <div class="about-text">
+        <h2>About Me</h2>
+        <p>
+          Hi, I'm Ali Ashraf, a Junior Data Science Engineer passionate about transforming data into actionable insights. 
+          I'm constantly learning and expanding my skills in data science, machine learning, and developing data-driven solutions 
+          that make a real-world impact.
+        </p>
+        <p>
+          My journey in data science began with my fascination for patterns and problem-solving. Today, I'm dedicated to 
+          extracting meaningful narratives from complex datasets and building models that drive decision-making.
+        </p>
+      </div>
+      <div class="about-image-container">
+        <img src="../../../assets/ali.jpg" alt="Ali Ashraf - Data Scientist" class="about-image">
+        <div class="social-links">
+          <a href="https://github.com/your-username" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://linkedin.com/in/your-username" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="https://twitter.com/your-username" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="skills-section">
+      <h3>Skills & Expertise</h3>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <i class="fas fa-chart-line"></i>
+          <h4>Data Analysis</h4>
+          <p>Pandas, Matplotlib, Seaborn</p>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-brain"></i>
+          <h4>Machine Learning</h4>
+          <p>Scikit-learn, TensorFlow</p>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-layer-group"></i>
+          <h4>Deep Learning</h4>
+          <p>Neural Networks, Keras</p>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-broom"></i>
+          <h4>Data Preprocessing</h4>
+          <p>Cleaning, Transformation, Feature Engineering</p>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-database"></i>
+          <h4>SQL & Databases</h4>
+          <p>PostgreSQL, MySQL, MongoDB</p>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-python"></i>
+          <h4>Python</h4>
+          <p>Advanced Programming</p>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-percent"></i>
+          <h4>Statistics</h4>
+          <p>Hypothesis Testing, Regression Analysis</p>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-comment-dots"></i>
+          <h4>NLP</h4>
+          <p>Text Analysis, Sentiment Analysis</p>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-cloud"></i>
+          <h4>Cloud Platforms</h4>
+          <p>AWS, Azure</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="contact">
+<section class="contact" id="contact">
   <div class="container">
     <div class="contact-content">
-      <h2>Contact Me</h2>
+      <h2>Get In Touch</h2>
+      <p class="contact-intro">Have a project in mind or want to discuss a data challenge? I'd love to hear from you!</p>
+      
       <form (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="name">Name:</label>
+          <label for="name">Name</label>
           <input
             type="text"
             id="name"
             [(ngModel)]="name"
             name="name"
             required
-            placeholder="Enter your name"
+            placeholder="Your name"
             aria-required="true"
           />
+          <div *ngIf="errorMessage && !name" class="error-message">
+            <span>Name is required</span>
+          </div>
         </div>
+        
         <div class="form-group">
-          <label for="email">Email:</label>
+          <label for="email">Email</label>
           <input
             type="email"
             id="email"
             [(ngModel)]="email"
             name="email"
             required
-            placeholder="Enter your email"
+            placeholder="Your email"
             aria-required="true"
           />
+          <div *ngIf="errorMessage && !email" class="error-message">
+            <span>Email is required</span>
+          </div>
         </div>
+        
         <div class="form-group">
-          <label for="message">Message:</label>
+          <label for="subject">Subject</label>
+          <input
+            type="text"
+            id="subject"
+            [(ngModel)]="subject"
+            name="subject"
+            placeholder="What is this regarding?"
+            aria-required="false"
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Message</label>
           <textarea
             id="message"
             [(ngModel)]="message"
             name="message"
             required
-            placeholder="Write your message here..."
+            placeholder="Your message..."
             aria-required="true"
+            rows="5"
           ></textarea>
+          <div *ngIf="errorMessage && !message" class="error-message">
+            <span>Message is required</span>
+          </div>
         </div>
-        <button type="submit" [disabled]="!name || !email || !message">Send</button>
+        
+        <button type="submit" [disabled]="!name || !email || !message" class="submit-button">
+          <span>Send Message</span>
+          <i class="fas fa-paper-plane"></i>
+        </button>
       </form>
-      <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
-      <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+      
+      <div *ngIf="successMessage" class="success-message">
+        <i class="fas fa-check-circle"></i>
+        <span>{{ successMessage }}</span>
+      </div>
+      
+      <div *ngIf="errorMessage" class="error-notification">
+        <i class="fas fa-exclamation-circle"></i>
+        <span>{{ errorMessage }}</span>
+      </div>
     </div>
   </div>
 </section>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <h3>Ali Ashraf</h3>
+        <p>Data Science Engineer</p>
+      </div>
+      
+      <div class="footer-links">
+        <div class="social-links">
+          <a href="https://github.com/your-username" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://linkedin.com/in/your-username" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="https://twitter.com/your-username" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="mailto:youremail@example.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      <p>&copy; {{currentYear}} Ali Ashraf. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
