@@ -1,9 +1,19 @@
-$primary: #6366f1; // Indigo
-$primary-dark: #4f46e5; // Darker indigo
-$secondary: #6b7280; // Cool gray
-$background: #f9fafb; // Light gray
-$text: #111827; // Dark gray
-$white: #ffffff; // White
-$shadow: rgba(0, 0, 0, 0.1); // Subtle shadow
-$success: #22c55e; // Green
-$error: #ef4444; // Red
+// Global Variables
+$primary: #6366f1;
+$primary-dark: #4f46e5;
+$secondary: #6b7280;
+$background: #f9fafb;
+$text: #111827;
+$white: #ffffff;
+$shadow: rgba(0, 0, 0, 0.1);
+$success: #22c55e;
+$error: #ef4444;
+
+// Projects Section Variables
+$primary-color: #6c5ce7;
+$secondary-color: #191a1f;
+$accent-color: #00d2d3;
+$dark-bg: #0f1016;
+$card-bg: #1a1b25;
+$text-color: #e2e2e2;
+$transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);

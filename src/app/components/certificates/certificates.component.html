@@ -1,0 +1,17 @@
+<section class="certificates">
+  <div class="container">
+    <h2 data-title="Certificates">Certificates</h2>
+    <div class="certificate-list">
+      <div *ngFor="let certificate of certificates" class="certificate-card">
+        <img *ngIf="certificate.image_url" [src]="certificate.image_url" [alt]="certificate.title" class="certificate-image" />
+        <h3>{{ certificate.title }}</h3>
+        <p class="issuer">{{ certificate.issuer }}</p>
+        <p class="issue-date">{{ certificate.issue_date | date: 'mediumDate' }}</p>
+        <div class="certificate-links">
+          <a *ngIf="certificate.certificate_url" [href]="certificate.certificate_url" target="_blank" class="view-link">View Certificate</a>
+        </div>
+      </div>
+    </div>
+    <p *ngIf="error" class="error">{{ error }}</p>
+  </div>
+</section>

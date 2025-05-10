@@ -35,4 +35,12 @@ export class SupabaseService {
     if (error) throw error;
     return data;
   }
+  async getCertificates() {
+    const { data, error } = await this.supabase
+      .from('certificates')
+      .select('id, title, issuer, issue_date, certificate_url, image_url')
+      .order('issue_date', { ascending: false });
+    if (error) throw error;
+    return data;
+  }
 }

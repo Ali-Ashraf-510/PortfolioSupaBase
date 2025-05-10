@@ -1,0 +1,200 @@
+@import "../../../style/variables.scss";
+@import "../../../style/utilities.scss";
+
+.certificates {
+  padding: 120px 0 80px;
+  background-color: $dark-bg; // Use $dark-bg instead of #1a1a1a
+  position: relative;
+  min-height: 100vh;
+  margin-top: 70px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(circle at 15% 15%, rgba(108, 92, 231, 0.03) 0%, transparent 40%),
+      radial-gradient(circle at 85% 85%, rgba(0, 210, 211, 0.03) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  .container {
+    @extend .container;
+    position: relative;
+    z-index: 2;
+  }
+
+  h2 {
+    @extend .section-title;
+    &[data-title]::after {
+      content: "Certificates";
+    }
+  }
+
+  .certificate-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 40px;
+    margin-top: 20px;
+  }
+
+  .certificate-card {
+    @extend .card;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: $transition;
+
+    &:hover {
+      transform: translateY(-10px);
+
+      .certificate-image {
+        transform: scale(1.05);
+        filter: brightness(1.1);
+      }
+
+      h3 {
+        color: $accent-color; // Use $accent-color for hover
+      }
+    }
+  }
+
+  .certificate-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: $transition;
+  }
+
+  h3 {
+    color: $text-color; // Use $text-color instead of $new-color
+    font-size: 1.4rem;
+    padding: 20px 20px 10px;
+    margin: 0;
+    transition: $transition;
+    font-weight: 600;
+  }
+
+  .issuer {
+    color: rgba($text-color, 0.7); // Use $text-color with opacity
+    font-size: 1rem;
+    padding: 0 20px;
+    margin: 0 0 10px;
+  }
+
+  .issue-date {
+    color: rgba($text-color, 0.7); // Use $text-color with opacity
+    font-size: 0.95rem;
+    padding: 0 20px;
+    margin: 0 0 20px;
+  }
+
+  .certificate-links {
+    display: flex;
+    padding: 0 20px 20px;
+    gap: 12px;
+
+    .view-link {
+      padding: 8px 16px;
+      background: $primary-color; // Use $primary-color for background
+      color: $white; // Fix: Use $white for readable text
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: $transition;
+      flex-grow: 1;
+      text-align: center;
+
+      &:hover {
+        background: darken($primary-color, 5%);
+      }
+    }
+  }
+
+  .error {
+    color: $error; // Use $error instead of hardcoded #ff5e57
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 100px 0 60px;
+
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+
+      &::after {
+        font-size: 3.5rem;
+      }
+    }
+
+    .certificate-list {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .certificate-card {
+      border-radius: 12px;
+
+      &:hover {
+        transform: translateY(-5px);
+      }
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      padding: 15px 15px 8px;
+    }
+
+    .issuer,
+    .issue-date {
+      font-size: 0.9rem;
+      padding: 0 15px;
+      margin: 0 0 15px;
+    }
+
+    .certificate-links {
+      padding: 0 15px 15px;
+
+      .view-link {
+        padding: 7px 14px;
+        font-size: 0.85rem;
+      }
+    }
+  }
+
+  :host-context([dir="rtl"]) {
+    direction: rtl;
+    text-align: right;
+  }
+}
+
+@keyframes cardLoad {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.certificate-card {
+  animation: cardLoad 0.5s ease-out forwards;
+
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.1}s;
+    }
+  }
+}
