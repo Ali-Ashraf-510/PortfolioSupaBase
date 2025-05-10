@@ -1,27 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router'; // Correct import for RouterLink
 import { SupabaseService } from '../../services/supabase.service';
+import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [RouterLink,CommonModule], // RouterLink is a directive, which is valid
+  imports: [CommonModule, RouterLink],
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent implements OnInit {
   projects: any[] = [];
-  errorMessage: string | null = null;
+  error: string | null = null;
 
   constructor(private supabaseService: SupabaseService) {}
 
-  async ngOnInit() {
+  ngOnInit() {
+    this.loadProjects();
+  }
+
+  async loadProjects() {
     try {
       this.projects = await this.supabaseService.getProjects();
-    } catch (error) {
-      this.errorMessage = 'Failed to load projects. Please try again later.';
-      console.error('Error fetching projects:', error);
+      this.error = null;
+    } catch (err) {
+      this.error ='Failed to load projects. Please try again.';
+      console.error('Error loading projects:', err);
     }
   }
 }

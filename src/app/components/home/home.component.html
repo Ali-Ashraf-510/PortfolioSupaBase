@@ -4,13 +4,75 @@
       <img src="../../../assets/profile.jpg" alt="Profile Photo" class="hero-image">
       <h1>Welcome to My Portfolio</h1>
       <p>Discover my projects and get in touch!</p>
-      <a routerLink="/projects" class="cta-button">View Projects</a>
+      <a routerLink="/projects"class="cta-button">View Projects</a>
     </div>
   </div>
 </section>
-<section class="home-container">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<section class="about">
+  <h2>About Me</h2>
+  <p>
+    Hi, I'm Ali Ashraf, a Junior Data Science Engineer passionate about transforming data into actionable insights. 
+    I'm still learning and expanding my skills in data science, machine learning, and data-driven solutions.
+  </p>
+  <h3>Skills</h3>
+  <ul>
+    <li><i class="fas fa-chart-line"></i> Data Analysis and Visualization (Pandas, Matplotlib, Seaborn)</li>
+    <li><i class="fas fa-brain"></i> Machine Learning (Scikit-learn, TensorFlow)</li>
+    <li><i class="fas fa-layer-group"></i> Deep Learning (Basics of Neural Networks)</li>
+    <li><i class="fas fa-broom"></i> Data Cleaning and Preprocessing</li>
+    <li><i class="fas fa-database"></i> SQL and Database Management</li>
+    <li><i class="fab fa-python"></i> Python Programming</li>
+    <li><i class="fas fa-percent"></i> Statistical Analysis</li>
+    <li><i class="fas fa-comment-dots"></i> Natural Language Processing (Basics)</li>
+    <li><i class="fas fa-cloud"></i> Cloud Platforms (Basic AWS, Azure)</li>
+  </ul>
+</section>
+
+<section class="contact">
   <div class="container">
-    <app-about></app-about>
-    <app-contact></app-contact>
+    <div class="contact-content">
+      <h2>Contact Me</h2>
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            [(ngModel)]="name"
+            name="name"
+            required
+            placeholder="Enter your name"
+            aria-required="true"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            [(ngModel)]="email"
+            name="email"
+            required
+            placeholder="Enter your email"
+            aria-required="true"
+          />
+        </div>
+        <div class="form-group">
+          <label for="message">Message:</label>
+          <textarea
+            id="message"
+            [(ngModel)]="message"
+            name="message"
+            required
+            placeholder="Write your message here..."
+            aria-required="true"
+          ></textarea>
+        </div>
+        <button type="submit" [disabled]="!name || !email || !message">Send</button>
+      </form>
+      <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+      <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+    </div>
   </div>
 </section>

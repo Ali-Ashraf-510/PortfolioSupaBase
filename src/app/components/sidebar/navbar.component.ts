@@ -1,9 +1,10 @@
-// navbar.component.ts
-
-import { Component, OnInit, HostListener, Renderer2, ElementRef } from '@angular/core';
-
+import { Component, OnInit, HostListener, Renderer2, ElementRef, NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-navbar',
+  standalone: true,
+  imports: [RouterModule,CommonModule], // Required for routerLink, routerLinkActive, and routerLinkActiveOptions
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
@@ -14,21 +15,11 @@ export class NavbarComponent implements OnInit {
   constructor(private renderer: Renderer2, private el: ElementRef) {}
 
   ngOnInit(): void {
-    // Initialize scroll position check on page load
     this.checkScrollPosition();
   }
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
-    
-    const navbarMenu = this.el.nativeElement.querySelector('.navbar-menu');
-    if (navbarMenu) {
-      if (this.isMenuOpen) {
-        this.renderer.addClass(navbarMenu, 'active');
-      } else {
-        this.renderer.removeClass(navbarMenu, 'active');
-      }
-    }
   }
 
   @HostListener('window:scroll', [])
@@ -39,30 +30,25 @@ export class NavbarComponent implements OnInit {
 
   private checkScrollPosition(): void {
     const navbar = this.el.nativeElement.querySelector('.navbar');
-    
-    if (window.scrollY > 50) {
-      this.renderer.addClass(navbar, 'scrolled');
-    } else {
-      this.renderer.removeClass(navbar, 'scrolled');
+    if (navbar) {
+      this.renderer.setProperty(navbar, 'className', window.scrollY > 50 ? 'navbar scrolled' : 'navbar');
     }
   }
 
   private updateScrollProgress(): void {
-    // Calculate scroll progress
     const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    this.scrollProgress = (window.scrollY / windowHeight) * 100;
-    
-    // Update progress bar width
-    const progressBar = this.el.nativeElement.querySelector('.scroll-progress');
-    if (progressBar) {
-      this.renderer.setStyle(progressBar, 'width', `${this.scrollProgress}%`);
+    if (windowHeight > 0) {
+      this.scrollProgress = (window.scrollY / windowHeight) * 100;
+      const progressBar = this.el.nativeElement.querySelector('.scroll-progress');
+      if (progressBar) {
+        this.renderer.setStyle(progressBar, 'width', `${this.scrollProgress}%`);
+      }
     }
   }
 
-  // Close menu when clicking on a link (for mobile)
   closeMenu(): void {
     if (this.isMenuOpen) {
-      this.toggleMenu();
+      this.isMenuOpen = false;
     }
   }
 }

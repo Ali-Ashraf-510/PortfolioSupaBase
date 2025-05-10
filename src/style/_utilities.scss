@@ -1,0 +1,28 @@
+@import 'variables'; // Import color variables
+
+.card {
+  background: $white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px $shadow;
+  padding: 24px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px $shadow;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $text;
+  margin-bottom: 20px;
+  text-align: center;
+}
