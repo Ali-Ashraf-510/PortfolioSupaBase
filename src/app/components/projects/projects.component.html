@@ -3,16 +3,32 @@
     <h2 data-title="Portfolio">Projects</h2>
     <div class="project-list">
       <div *ngFor="let project of projects" class="project-card">
-        <img [src]="project.photo_url" [alt]="project.title" class="project-image" />
-        <h3>{{ project.title }}</h3>
-        <p class="project-type">{{ project.project_type }}</p>
-        <p>{{ project.description }}</p>
-        <div class="project-links">
-          <a [routerLink]="['/project', project.id]" class="details-link">Details</a>
-          <a *ngIf="project.github_url" [href]="project.github_url" target="_blank" class="github-link">GitHub</a>
+        <div class="project-image-container">
+          <img [src]="project.photo_url" [alt]="project.title" class="project-image" />
+          <div class="project-overlay">
+            <span class="project-type">{{ project.project_type }}</span>
+          </div>
+        </div>
+        <div class="project-content">
+          <h3>{{ project.title }}</h3>
+          <p class="project-type">{{ project.project_type }}</p>
+          <p class="project-description">{{ project.description }}</p>
+          <div class="project-links">
+            <a [routerLink]="['/project', project.id]" class="details-link">
+              <span>View Details</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <a *ngIf="project.github_url" [href]="project.github_url" target="_blank" class="github-link">
+              <i class="fab fa-github"></i>
+              <span>GitHub</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
-    <p *ngIf="error" class="error">{{ error }}</p>
+    <div *ngIf="error" class="error">
+      <i class="fas fa-exclamation-circle"></i>
+      <span>{{ error }}</span>
+    </div>
   </div>
 </section>
